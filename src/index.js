@@ -20,10 +20,10 @@ app.use(express.json());
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_CONNECTION_STRING,
+        mongoUrl: "mongodb+srv://facundoj:Facu2000@cluster0.1w4mu.mongodb.net/DB-todolist?authSource=admin&replicaSet=atlas-rbr49r-shard-0&readPreference=primary&ssl=true",
         ttl: 60
     }),
-    secret: process.env.SESSION_SECRET,
+    secret: "mi secreto",
     resave: true,
     saveUninitialized: false,
     cookie: { 
