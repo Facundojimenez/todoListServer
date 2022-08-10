@@ -35,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://task-master-01.herokuapp.com/",
     credentials: true
 }));
 app.use(morgan('dev'))
