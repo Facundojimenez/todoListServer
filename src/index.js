@@ -3,6 +3,7 @@ const app = express();
 const usersRoutes = require("./routes/usersRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
 const stagesRoutes = require("./routes/stagesRoutes");
+const {sendError} = require("./utils/errorHandling")
 const path = require('path')
 const dotenv = require("dotenv").config({path: path.resolve(__dirname, "./config/config.env")});
 const mongoDB = require("./db/mongoConnection");
@@ -35,18 +36,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: "https://task-master-01.herokuapp.com",
+    origin: ["http://localhost:3000", "https://task-master-01.herokuapp.com"],
     credentials: true
 }));
 app.use(morgan('dev'))
 app.use("/api/users", usersRoutes);
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/stages", stagesRoutes);
-
+app.use(sendError)
 
  /* -------------------------------- */
 
-
-app.listen(process.env.PORT || process.env.SERVER_PORT, (req, res) => {
-    console.log(`serve iniciado correctamente en el puerto ${process.env.SERVER_PORT}` )
+const PORT = process.env.PORT || process.env.SERVER_PORT
+app.listen(PORT, (req, res) => {
+    console.log(`serve iniciado correctamente en el puerto ${PORT}` )
 })
